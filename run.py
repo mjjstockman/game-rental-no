@@ -18,22 +18,23 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("game_rental")
 
-# sales = SHEET.worksheet("games")
-# data = sales.get_all_values()
-# print(data)
-
 def choose_action():
-    """
-    Display initial options to user.
-    Get desiered action input from user via the terminal.
-    """
     print("Do you want to:\n 1) Make a sale?\n 2) Return a sale?\n "
           "3) Check stock?\n 4) Add a new customer?\n 5) Add a new title?\n")
-
     chosen_action = input("Please select from above by entering the "
                           "corresponding number and pressing Enter: ")
-    
-    print(chosen_action)
+    validate_chosen_action(chosen_action)
 
+
+def validate_chosen_action(chosen_action):
+    try:
+        if chosen_action not in (1, 2, 3, 4, 5):
+            raise ValueError(
+                "Must be a whole num between 1 and 5"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again")
+
+ 
 
 choose_action()
