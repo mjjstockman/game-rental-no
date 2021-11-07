@@ -19,6 +19,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("game_rental")
 
 def choose_action():
+    """
+    Get chosen action input from user.
+    """
     print("Do you want to:\n 1) Make a sale?\n 2) Return a sale?\n "
           "3) Check stock?\n 4) Add a new customer?\n 5) Add a new title?\n")
     chosen_action = input("Please select from above by entering the "
@@ -27,6 +30,9 @@ def choose_action():
 
 
 def validate_chosen_action(chosen_action):
+    """
+   Raises ValueError if user input is not an integer between 1 and 5
+    """
     try:
         if chosen_action not in (1, 2, 3, 4, 5):
             raise ValueError(
